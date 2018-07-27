@@ -5,6 +5,7 @@ Monitors the temperature in multiple rooms and sends the data to a server using 
 
 - Clang 6
 - Boost 1.67
+- bcm2835
 
 ### Install Clang on Raspberry PI
 
@@ -48,6 +49,22 @@ Build the necessary subset only
 cd /usr/local/boost_1_67_0
 ./bootstrap.sh
 bjam install --prefix="<your boost install folder>" --with-system --with-date_time --with-random link=static runtime-link=shared threading=multi
+```
+
+### Install bcm2835 library
+
+```
+cd ~
+wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.56.tar.gz 
+```
+
+Extract archive and install library
+
+```
+tar -xvzf bcm2835-1.56.tar.gz
+./configure
+./make 
+sudo make install
 ```
 
 ## Build project
