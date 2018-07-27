@@ -1,15 +1,15 @@
-CC = g++
+CC = clang++
 
 OPTIONS = -std=c++11
 
 INCLUDES = -I./third-party
 INCLUDES += -I./third-party/socket.io-client-cpp/lib/websocketpp
 INCLUDES += -I./third-party/socket.io-client-cpp/lib/rapidjson/include
-INCLUDES += -I./third-party/boost_1_67_0/include
+INCLUDES += -I${BOOST_PATH}/include
 
-LIBDIRS = -L./third-party/boost_1_67_0/lib
+LIBDIRS = -L${BOOST_PATH}/lib
 
-SOURCEFILES = ./src/thermostat.cpp
+SOURCEFILES = ./src/*.cpp
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/sio_client.cpp
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/sio_socket.cpp
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/internal/sio_client_impl.cpp 
