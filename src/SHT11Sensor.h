@@ -10,7 +10,8 @@
 class SHT11Sensor
 {
 public:
-  SHT11Sensor(std::function<void(float)> aTempCallBack, std::function<void(float)> aHumidityCallBack);
+  SHT11Sensor(std::function<void(float)> aTempCallBack, 
+              std::function<void(float)> aHumidityCallBack);
 
   void Init();
 
@@ -22,6 +23,6 @@ private:
 
   std::function<void(float)> mTempCallBack;
   std::function<void(float)> mHumidityCallBack;
-}
+};
 
 #endif // _SHT11_SENSOR_H_
