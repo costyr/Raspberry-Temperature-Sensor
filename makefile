@@ -20,20 +20,19 @@ SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/sio_socket.cpp
 SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/internal/sio_client_impl.cpp 
 SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/internal/sio_packet.cpp
 
-LIBS_C = -lbcm2835
-LIBS_CPP = -lboost_system -lpthread
+LIBS = -lboost_system -lpthread -lbcm2835
 
 compile_c:
 	@echo "Compiling c files..."
-	${CC} ${INCLUDES_C} -c ${SOURCEFILES_C} ${LIBS_C}
+	${CC} ${INCLUDES_C} -c ${SOURCEFILES_C}
 
 compile_cpp:
 	@echo "Compiling cpp files..."
-	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} ${LIBDIRS_CPP} ${SOURCEFILES_CPP} ${OPTIONS} ${LIBS_CPP}
+	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${OPTIONS}
 
 all: compile_c compile_cpp
 	@echo "Linking..."
-	${CCXX} *.o -o thermostat
+	${CCXX} ${LIBDIRS} ${LIBS} *.o -o thermostat
 
 clean:
 	@echo "Cleaning up.."
