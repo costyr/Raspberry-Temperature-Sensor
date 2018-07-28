@@ -20,7 +20,7 @@ LIBS = -lboost_system -lpthread -lbcm2835
 
 all:
 	@echo "Building..."
-	${CC} ${INCLUDES} ${LIBDIRS} ${OPTIONS} ${SOURCEFILES} ${LIBS} -o thermostat
+	${CC} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES} ${LIBDIRS} ${OPTIONS} ${SOURCEFILES} ${LIBS} -o thermostat
 
 clean:
 	@echo "Cleaning up.."
