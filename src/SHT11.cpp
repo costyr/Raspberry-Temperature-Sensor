@@ -4,7 +4,7 @@
 
 #include <bcm2835.h>
 #include <stdio.h>
-#include <rpi-sht1x\RPi_SHT1x.h>
+#include <rpi-sht1x/RPi_SHT1x.h>
 #include <time.h>
 #include "SHT11.h"
 
@@ -19,7 +19,7 @@ void SHT11::Init()
     // Wait at least 11ms after power-up (chapter 3.1)
     delay(20);
 
-  // Set up the SHT1x Data and Clock Pins
+    // Set up the SHT1x Data and Clock Pins
     SHT1x_InitPins();
 
     // Reset the SHT1x
