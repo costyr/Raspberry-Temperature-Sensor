@@ -10,7 +10,7 @@ This is a derivative work based on
 	Date: 04/04/2011
 	Source: http://www.theniceguy.net/2722
 */
-#ifde __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif	
 #ifndef RPI_SHT1x_H_
