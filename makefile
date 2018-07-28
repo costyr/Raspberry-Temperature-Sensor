@@ -10,6 +10,7 @@ INCLUDES += -I${BOOST_PATH}/include
 LIBDIRS = -L${BOOST_PATH}/lib
 
 SOURCEFILES = ./src/*.cpp
+SOURCEFILES += ./third-party/rpi-sht1x/RPi_SHT1x.c
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/sio_client.cpp
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/sio_socket.cpp
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/internal/sio_client_impl.cpp 
