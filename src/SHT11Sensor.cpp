@@ -28,7 +28,7 @@ void SHT11Sensor::Init()
 
 void SHT11Sensor::Read()
 {
-    /*unsigned char noError = 1;
+    unsigned char noError = 1;
 
     // Request Temperature measurement
     noError = SHT1x_Measure_Start(SHT1xMeaT);
@@ -71,5 +71,5 @@ void SHT11Sensor::Read()
     {
         mHumidity = humi_val.f;
         mHumidityCallBack(mHumidity);
-    }*/
+    }
 }
