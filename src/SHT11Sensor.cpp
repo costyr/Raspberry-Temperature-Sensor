@@ -54,7 +54,7 @@ void SHT11Sensor::Read()
     noError = SHT1x_Get_Measure_Value((unsigned short int *)&humi_val.i);
     if (!noError)
         return;
-
+/*
     // Convert intergers to float and calculate true values
     temp_val.f = (float)temp_val.i;
     humi_val.f = (float)humi_val.i;
@@ -72,5 +72,5 @@ void SHT11Sensor::Read()
     {
         mHumidity = humi_val.f;
         mHumidityCallBack(mHumidity);
-    }
+    }*/
 }
