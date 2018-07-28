@@ -56,6 +56,8 @@ typedef union
 } value;
 
 /* Public Functions ----------------------------------------------------------- */
+extern C
+{
 void SHT1x_Transmission_Start( void );
 unsigned char SHT1x_Readbyte( unsigned char sendAck );
 unsigned char SHT1x_Sendbyte( unsigned char value );
@@ -66,5 +68,6 @@ void SHT1x_Reset();
 unsigned char SHT1x_Mirrorbyte(unsigned char value);
 void SHT1x_Xrc_check(unsigned char value);
 void SHT1x_Calc(float *p_humidity ,float *p_temperature);
+}
 #endif
 
