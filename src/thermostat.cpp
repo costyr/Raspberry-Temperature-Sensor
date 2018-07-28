@@ -3,6 +3,11 @@
  * 
  */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wexpansion-to-defined"
+#import <pop/POP.h>
+#pragma clang diagnostic pop
+
 #include <bcm2835.h>
 #include "SHT11Sensor.h"
 
