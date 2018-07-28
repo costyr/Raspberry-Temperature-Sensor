@@ -68,6 +68,7 @@ void SHT1x_Reset();
 unsigned char SHT1x_Mirrorbyte(unsigned char value);
 void SHT1x_Xrc_check(unsigned char value);
 void SHT1x_Calc(float *p_humidity ,float *p_temperature);
+#endif
 #ifdef __cplusplus
 }
 #endif
