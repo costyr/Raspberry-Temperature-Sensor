@@ -8,9 +8,10 @@
 #include <time.h>
 #include "SHT11Sensor.h"
 
-SHT11Sensor::SHT11Sensor(std::function<void(int)> aTempCallBack, std::function<int> aHumidityCallBack)
-        : mTempCallBack(aTempCallBack),
-            mHumidityCallBack(aHumidityCallBack)
+SHT11Sensor::SHT11Sensor(std::function<void(float)> aTempCallBack, 
+                         std::function<void(float)> aHumidityCallBack)
+: mTempCallBack(aTempCallBack),
+  mHumidityCallBack(aHumidityCallBack)
 {
 }
 
