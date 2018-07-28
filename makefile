@@ -6,7 +6,7 @@ OPTIONS_CPP = -std=c++11
 INCLUDES_C = -I./third-party
 
 INCLUDES_CPP = -I./third-party
-INCLUDES_CPP = -I./third-party/socket.io-client-cpp/lib/websocketpp
+INCLUDES_CPP += -I./third-party/socket.io-client-cpp/lib/websocketpp
 INCLUDES_CPP += -I./third-party/socket.io-client-cpp/lib/rapidjson/include
 INCLUDES_CPP += -I${BOOST_PATH}/include
 
