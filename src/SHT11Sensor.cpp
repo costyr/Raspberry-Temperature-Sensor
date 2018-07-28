@@ -1,13 +1,19 @@
 /**
  * 
  */
-extern C
-{
+
 #include <stdio.h>
 #include <time.h>
 #include "rpi-sht1x/RPi_SHT1x.h"
-}
 #include "SHT11Sensor.h"
+
+extern C
+{
+  void SHT1x_InitPins( void );
+  void SHT1x_Reset();
+  unsigned char SHT1x_Measure_Start( SHT1xMeasureType type );
+  unsigned char SHT1x_Get_Measure_Value(unsigned short int * value );
+}
 
 SHT11Sensor::SHT11Sensor(std::function<void(float)> aTempCallBack,
                          std::function<void(float)> aHumidityCallBack)
