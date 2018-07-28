@@ -1,11 +1,14 @@
-CC = clang++
+CC = clang
+CCXX = clang++
 
-OPTIONS = -std=c++11
+OPTIONS_CPP = -std=c++11
 
-INCLUDES = -I./third-party
-INCLUDES += -I./third-party/socket.io-client-cpp/lib/websocketpp
-INCLUDES += -I./third-party/socket.io-client-cpp/lib/rapidjson/include
-INCLUDES += -I${BOOST_PATH}/include
+INCLUDES_C = -I./third-party
+
+INCLUDES_CPP = -I./third-party
+INCLUDES_CPP = -I./third-party/socket.io-client-cpp/lib/websocketpp
+INCLUDES_CPP += -I./third-party/socket.io-client-cpp/lib/rapidjson/include
+INCLUDES_CPP += -I${BOOST_PATH}/include
 
 LIBDIRS = -L${BOOST_PATH}/lib
 
@@ -17,11 +20,20 @@ SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/sio_socket.cpp
 SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/internal/sio_client_impl.cpp 
 SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/internal/sio_packet.cpp
 
-LIBS = -lboost_system -lpthread -lbcm2835
+LIBS_C = -lbcm2835
+LIBS_CPP = -lboost_system -lpthread
 
-all:
-	@echo "Building..."
-	${CC} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES} ${LIBDIRS} -x c ${SOURCEFILES_C} -x c++ ${SOURCEFILES_CPP} ${OPTIONS} ${LIBS} -o thermostat
+compile_c:
+	@echo "Compiling c files..."
+	${CC} ${INCLUDES_C} -c ${SOURCEFILES_C} ${LIBS_C}
+
+compile_cpp:
+	@echo "Compiling cpp files..."
+	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} ${LIBDIRS_CPP} ${SOURCEFILES_CPP} ${OPTIONS} ${LIBS_CPP}
+
+all: compile_c compile_cpp
+	@echo "Linking..."
+	${CCXX} *.o -o thermostat
 
 clean:
 	@echo "Cleaning up.."
