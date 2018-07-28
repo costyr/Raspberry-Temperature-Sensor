@@ -3,7 +3,7 @@
  * 
  */
 
-#include "SHT11.h"
+#include "SHT11Sensor.h"
 
 int main() 
 {
@@ -19,6 +19,6 @@ int main()
     printf("Humidity: %0.1f%%\n", aHumidity);
   }
 
-  SHT11 sht11(printTemperature, printHumidity);
-  stt11.Read();
+  SHT11Sensor sht11(printTemperature, printHumidity);
+  sht11.Read();
 }

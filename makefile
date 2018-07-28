@@ -16,7 +16,7 @@ SOURCEFILES += ./third-party/socket.io-client-cpp/src/sio_socket.cpp
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/internal/sio_client_impl.cpp 
 SOURCEFILES += ./third-party/socket.io-client-cpp/src/internal/sio_packet.cpp
 
-LIBS = -lboost_system -lpthread
+LIBS = -lboost_system -lpthread -llibbcm2835
 
 all:
 	@echo "Building..."

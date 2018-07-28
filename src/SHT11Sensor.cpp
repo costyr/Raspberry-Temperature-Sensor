@@ -8,13 +8,13 @@
 #include <time.h>
 #include "SHT11.h"
 
-SHT11::SHT11(std::function<void(int)> aTempCallBack, std::function<int> aHumidityCallBack)
+SHT11Sensor::SHT11Sensor(std::function<void(int)> aTempCallBack, std::function<int> aHumidityCallBack)
         : mTempCallBack(aTempCallBack),
             mHumidityCallBack(aHumidityCallBack)
 {
 }
 
-void SHT11::Init()
+void SHT11Sensor::Init()
 {
     // Wait at least 11ms after power-up (chapter 3.1)
     delay(20);
@@ -26,7 +26,7 @@ void SHT11::Init()
     SHT1x_Reset();
 }
 
-void SHT11::Read()
+void SHT11Sensor::Read()
 {
     unsigned char noError = 1;
 
