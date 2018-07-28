@@ -43,7 +43,7 @@ void SHT11Sensor::Read()
     if (!noError)
         return;
 
-    value humi_val;
+    /*value humi_val;
 
     // Request Humidity Measurement
     noError = SHT1x_Measure_Start(SHT1xMeaRh);
