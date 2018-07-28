@@ -1,6 +1,6 @@
 CC = clang++
 
-OPTIONS = -std=c++11
+OPTIONS = -std=c++17
 
 INCLUDES = -I./third-party
 INCLUDES += -I./third-party/socket.io-client-cpp/lib/websocketpp
