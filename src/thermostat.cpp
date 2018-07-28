@@ -20,5 +20,6 @@ int main()
   };
 
   SHT11Sensor sht11(printTemperature, printHumidity);
+  sht11.Init();
   sht11.Read();
 }
