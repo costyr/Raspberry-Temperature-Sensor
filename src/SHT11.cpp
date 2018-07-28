@@ -4,7 +4,7 @@
 
 #include <bcm2835.h>
 #include <stdio.h>
-#include <rpi-sht1x/RPi_SHT1x.h>
+#include "rpi-sht1x/RPi_SHT1x.h"
 #include <time.h>
 #include "SHT11.h"
 
