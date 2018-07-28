@@ -1,17 +1,18 @@
 /**
  * 
  */
-extern c {
-#include "rpi-sht1x/RPi_SHT1x.h"
-}
+extern C
+{
 #include <stdio.h>
 #include <time.h>
+#include "rpi-sht1x/RPi_SHT1x.h"
+}
 #include "SHT11Sensor.h"
 
-SHT11Sensor::SHT11Sensor(std::function<void(float)> aTempCallBack, 
+SHT11Sensor::SHT11Sensor(std::function<void(float)> aTempCallBack,
                          std::function<void(float)> aHumidityCallBack)
-: mTempCallBack(aTempCallBack),
-  mHumidityCallBack(aHumidityCallBack)
+    : mTempCallBack(aTempCallBack),
+      mHumidityCallBack(aHumidityCallBack)
 {
 }
 
