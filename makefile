@@ -21,7 +21,7 @@ LIBS = -lboost_system -lpthread -lbcm2835
 
 all:
 	@echo "Building..."
-	${CC} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES} ${LIBDIRS} -x c ${SOURCEFILES_C} ${OPTIONS} -x c++ ${SOURCEFILES_CPP} ${LIBS} -o thermostat
+	${CC} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES} ${LIBDIRS} -x c ${SOURCEFILES_C} -x c++ ${SOURCEFILES_CPP} ${OPTIONS} ${LIBS} -o thermostat
 
 clean:
 	@echo "Cleaning up.."
