@@ -17,7 +17,7 @@ int main()
   {
     //Print the Humidity to the console
     printf("Humidity: %0.1f%%\n", aHumidity);
-  }
+  };
 
   SHT11Sensor sht11(printTemperature, printHumidity);
   sht11.Read();
