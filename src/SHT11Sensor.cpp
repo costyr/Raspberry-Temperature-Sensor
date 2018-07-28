@@ -1,10 +1,10 @@
 /**
  * 
  */
-
-#include <bcm2835.h>
-#include <stdio.h>
+extern c {
 #include "rpi-sht1x/RPi_SHT1x.h"
+}
+#include <stdio.h>
 #include <time.h>
 #include "SHT11Sensor.h"
 
