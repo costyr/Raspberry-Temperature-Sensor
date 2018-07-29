@@ -24,15 +24,15 @@ LIBS = -lboost_system -lpthread -lbcm2835
 
 compile_c:
 	@echo "Compiling c files..."
-	${CC} ${INCLUDES_C} -c ${SOURCEFILES_C}
+	${CC} ${INCLUDES_C} -c ${SOURCEFILES_C} 
 
 compile_cpp:
 	@echo "Compiling cpp files..."
-	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${OPTIONS}
+	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${LIBDIRS} ${LIBS} ${OPTIONS}
 
 all: compile_c compile_cpp
 	@echo "Linking..."
-	${CCXX} ${LIBDIRS} ${LIBS} *.o -o thermostat
+	${CCXX}  *.o -o thermostat
 
 clean:
 	@echo "Cleaning up.."
