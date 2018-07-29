@@ -22,6 +22,7 @@ int main()
   memset(&action, 0, sizeof(struct sigaction));
   action.sa_handler = term;
   sigaction(SIGTERM, &action, NULL);
+  sigaction(SIGINT, &action, NULL);
 
   std::function<void(float)> printTemperature = [](float aTemperature) 
   {
@@ -45,7 +46,7 @@ int main()
   while (!done) 
   {
     sht11.Read();
-    sleep(5000);
+    sleep(5);
   }
 
   printf("Done!");
