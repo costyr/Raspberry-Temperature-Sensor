@@ -22,7 +22,7 @@ int main()
 
   //Initialise the Raspberry Pi GPIO
   if(!bcm2835_init())
-	return 1;
+	  return 1;
 
   SHT11Sensor sht11(printTemperature, printHumidity);
   sht11.Init();
