@@ -28,11 +28,11 @@ compile_c:
 
 compile_cpp:
 	@echo "Compiling cpp files..."
-	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${LIBDIRS} ${LIBS} ${OPTIONS}
+	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${OPTIONS}
 
 all: compile_c compile_cpp
 	@echo "Linking..."
-	${CCXX}  *.o -o thermostat
+	${CCXX} *.o ${LIBDIRS} ${LIBS} -o thermostat
 
 clean:
 	@echo "Cleaning up.."
