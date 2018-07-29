@@ -4,6 +4,7 @@
  */
 
 #include <signal.h>
+#include <unistd.h>
 #include <bcm2835.h>
 #include "SHT11Sensor.h"
 
