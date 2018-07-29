@@ -3,11 +3,24 @@
  * 
  */
 
+#include <signal.h>
 #include <bcm2835.h>
 #include "SHT11Sensor.h"
 
+volatile sig_atomic_t done = 0;
+ 
+void term(int signum)
+{ 
+  done = 1;
+}
+
 int main() 
 {
+  struct sigaction action;
+  memset(&action, 0, sizeof(struct sigaction));
+  action.sa_handler = term;
+  sigaction(SIGTERM, &action, NULL);
+
   std::function<void(float)> printTemperature = [](float aTemperature) 
   {
     //Print the Temperature to the console
@@ -26,5 +39,9 @@ int main()
 
   SHT11Sensor sht11(printTemperature, printHumidity);
   sht11.Init();
-  sht11.Read();
+
+  while (!done)
+    sht11.Read();
+
+  printf("Done!");
 }
