@@ -42,8 +42,11 @@ int main()
   SHT11Sensor sht11(printTemperature, printHumidity);
   sht11.Init();
 
-  while (!done)
+  while (!done) 
+  {
     sht11.Read();
+    sleep(5000);
+  }
 
   printf("Done!");
 }
