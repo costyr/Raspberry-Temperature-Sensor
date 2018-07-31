@@ -6,10 +6,7 @@
 #ifndef _COMMANDLINE_OPTIONS_H_
 #define _COMMANDLINE_OPTIONS_H_
 
-#include <string>
-#include <vector>
-#include <utility>
-#include <functional>
+#include "Common.h"
 
 class CommandLineOptions 
 {
@@ -23,7 +20,7 @@ public:
   const string & GetServerToken() const;
  
 private:
-  vector<pair<string, std::function<void(int &)>>> kOptionHandlers;
+  vector<pair<string, function<int(int &, int, char * [])>>> kOptionHandlers;
 
   string mServerURL;
   string mServerToken;

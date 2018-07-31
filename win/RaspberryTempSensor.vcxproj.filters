@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{38951850-c8a0-4fac-8554-355f47d623f8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\CommandLineOptions.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SocketIOConnection.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\thermostat.cpp" />
+    <ClCompile Include="..\src\TemperatureSensorFactory.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\VirtualTemperatureSensor.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\CommandLineOptions.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SocketIOConnection.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TemperatureSensor.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TemperatureSensorFactory.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Common.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\VirtualTemperatureSensor.h">
+      <Filter>core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

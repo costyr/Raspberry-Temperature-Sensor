@@ -3,11 +3,12 @@
  * 
  */
 
-#include <signal.h>
-#include <unistd.h>
-#include <string.h>
+#ifndef _WIN32
 #include <bcm2835.h>
-#include "SHT11Sensor.h"
+#endif
+#include "Common.h"
+#include <signal.h>
+#include "TemperatureSensorFactory.h"
 
 volatile sig_atomic_t done = 0;
  
@@ -18,11 +19,21 @@ void term(int signum)
 
 int main() 
 {
+#ifdef _WIN32
+  signal(SIGTERM, term);
+  signal(SIGINT, term);
+#else
+
+  //Initialize the Raspberry Pi GPIO
+  if (!bcm2835_init())
+    return 1;
+
   struct sigaction action;
   memset(&action, 0, sizeof(struct sigaction));
   action.sa_handler = term;
   sigaction(SIGTERM, &action, NULL);
   sigaction(SIGINT, &action, NULL);
+#endif
 
   std::function<void(float)> printTemperature = [](float aTemperature) 
   {
@@ -36,18 +47,21 @@ int main()
     printf("Humidity: %0.1f%%\n", aHumidity);
   };
 
-  //Initialise the Raspberry Pi GPIO
-  if(!bcm2835_init())
-	  return 1;
+  TemperatureSensorFactory temperatureSensorFactory;
 
-  SHT11Sensor sht11(printTemperature, printHumidity);
-  sht11.Init();
+  std::unique_ptr<TemperatureSensor> temperatureSensor = 
+    temperatureSensorFactory.CreateTemperatureSensor(printTemperature, printHumidity);
+
+  if (!temperatureSensor)
+    return -1;
+
+  temperatureSensor->Init();
 
   while (!done) 
   {
-    sht11.Read();
-    sleep(5);
+    temperatureSensor->Read();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 
-  printf("Done!");
+  printf("Done!\n");
 }

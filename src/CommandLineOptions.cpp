@@ -7,9 +7,8 @@
 
 CommandLineOptions::CommandLineOptions()
 {
-    kOptionHandlers =
-    {
-        { "server_url", [this](int &aPos, int argc, char *argv[]) 
+    kOptionHandlers = {
+        { "--server_url", [this](int &aPos, int argc, char *argv[]) 
           { 
             if (aPos < argc) 
               return 1; 
@@ -18,7 +17,7 @@ CommandLineOptions::CommandLineOptions()
             return 0; 
           }
         },
-        { "server_token", [this](int &aPos, int argc, char *argv[]) 
+        { "--server_token", [this](int &aPos, int argc, char *argv[]) 
           {   
             if (aPos < argc) 
               return 1; 
@@ -27,7 +26,7 @@ CommandLineOptions::CommandLineOptions()
             return 0; 
           }
         }
-    }
+    };
 }
 
 int CommandLineOptions::ParseCommandLine(int argc, char *argv[])
@@ -36,7 +35,8 @@ int CommandLineOptions::ParseCommandLine(int argc, char *argv[])
     {
       string commandLineOption(argv[i]);
 
-      auto it = std::find(kOptionHandlers.begin(), kOptionHandlers.end(), commandLineOption);
+      auto it = find_if(kOptionHandlers.begin(), kOptionHandlers.end(), 
+        [&commandLineOption](auto & aElem) { return (commandLineOption == aElem.first); });
 
       if (it != kOptionHandlers.end()) 
       {

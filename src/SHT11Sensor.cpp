@@ -7,10 +7,10 @@
 #include "rpi-sht1x/RPi_SHT1x.h"
 #include "SHT11Sensor.h"
 
-SHT11Sensor::SHT11Sensor(std::function<void(float)> aTempCallBack,
-                         std::function<void(float)> aHumidityCallBack)
-    : mTempCallBack(aTempCallBack),
-      mHumidityCallBack(aHumidityCallBack)
+SHT11Sensor::SHT11Sensor(function<void(float)> aTempCallBack,
+                         function<void(float)> aHumidityCallBack)
+: mTempCallBack(aTempCallBack),
+  mHumidityCallBack(aHumidityCallBack)
 {
 }
 
