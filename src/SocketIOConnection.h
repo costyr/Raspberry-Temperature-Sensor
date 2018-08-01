@@ -1,5 +1,5 @@
 /**
- *  
+ *
  */
 
 #ifndef _SOCKET_IO_CONNECTION_H_
@@ -12,14 +12,23 @@
 class SocketIOConnection
 {
 public:
-  SocketIOConnection();
+  SocketIOConnection(const string & aToken);
+
+  ~SocketIOConnection();
 
   void Connect(const string & aURL);
 
   void Emit(float aTemperature);
 
-private:  
-  //sio::client mSocketIOClient;
+  bool ConnectionFailed() const;
+
+private:
+  string      mToken;
+  sio::client mSocketIOClient;
+
+  bool mConnectionFailed{ false };
+
+  void OnFail();
 };
 
-#endif // _SOCKET_IO_CONNECTION_H_
+#endif  // _SOCKET_IO_CONNECTION_H_

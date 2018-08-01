@@ -1,22 +1,41 @@
 /**
- *  
+ *
  */
 
 #include "SocketIOConnection.h"
 
-SocketIOConnection::SocketIOConnection() 
+SocketIOConnection::SocketIOConnection(const string & aToken)
+  : mToken(aToken)
 {
-
 }
 
-void SocketIOConnection::Connect(const string & aURL) 
+SocketIOConnection::~SocketIOConnection()
 {
-  aURL;
-  //mSocketIOClient.connect(aURL);
+  mSocketIOClient.close();
 }
 
-void SocketIOConnection::Emit(float aTemperature) 
+void SocketIOConnection::Connect(const string & aURL)
 {
-  aTemperature;
-  //mSocketIOClient.socket()->emit("Room1Temp", aTemperature);
+  mSocketIOClient.set_fail_listener(std::bind(&SocketIOConnection::OnFail, this));
+
+  mSocketIOClient.set_reconnect_attempts(0);
+  mSocketIOClient.connect(aURL);
+}
+
+void SocketIOConnection::Emit(float aTemperature)
+{
+  auto msg                = sio::object_message::create();
+  msg->get_map()["token"] = sio::string_message::create(mToken);
+  msg->get_map()["temp"]  = sio::double_message::create(aTemperature);
+  mSocketIOClient.socket()->emit("Room1Temp", msg);
+}
+
+bool SocketIOConnection::ConnectionFailed() const
+{
+  return mConnectionFailed;
+}
+
+void SocketIOConnection::OnFail()
+{
+  mConnectionFailed = true;
 }
