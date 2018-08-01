@@ -68,7 +68,7 @@ void SHT11Sensor::Read()
         mTempCallBack(mTemperature);
     }
 
-    if (fabs(humi_val.f != mHumidity) >= 0.1)
+    if (fabs(humi_val.f - mHumidity) >= 0.1)
     {
         mHumidity = humi_val.f;
         mHumidityCallBack(mHumidity);
