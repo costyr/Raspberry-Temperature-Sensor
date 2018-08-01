@@ -4,6 +4,12 @@
     <Filter Include="core">
       <UniqueIdentifier>{38951850-c8a0-4fac-8554-355f47d623f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="socketio">
+      <UniqueIdentifier>{f1e4f204-b979-4b44-9f21-9885014ec04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="socketio\internal">
+      <UniqueIdentifier>{a415f9f2-e08d-4cc3-994a-226de9e786e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CommandLineOptions.cpp">
@@ -18,6 +24,18 @@
     </ClCompile>
     <ClCompile Include="..\src\VirtualTemperatureSensor.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\sio_client.cpp">
+      <Filter>socketio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\sio_socket.cpp">
+      <Filter>socketio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\internal\sio_client_impl.cpp">
+      <Filter>socketio\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\internal\sio_packet.cpp">
+      <Filter>socketio\internal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +56,21 @@
     </ClInclude>
     <ClInclude Include="..\src\VirtualTemperatureSensor.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_client.h">
+      <Filter>socketio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_message.h">
+      <Filter>socketio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_socket.h">
+      <Filter>socketio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\internal\sio_client_impl.h">
+      <Filter>socketio\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\internal\sio_packet.h">
+      <Filter>socketio\internal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -71,12 +71,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WEBSOCKETPP_CPP11_STL_;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\third-party</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\third-party;..\third-party\socket.io-client-cpp\lib\websocketpp;..\third-party\socket.io-client-cpp\lib\rapidjson\include;%BOOST_PATH%</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
@@ -105,6 +105,10 @@
     <ClCompile Include="..\src\TemperatureSensorFactory.cpp" />
     <ClCompile Include="..\src\thermostat.cpp" />
     <ClCompile Include="..\src\VirtualTemperatureSensor.cpp" />
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\internal\sio_client_impl.cpp" />
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\internal\sio_packet.cpp" />
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\sio_client.cpp" />
+    <ClCompile Include="..\third-party\socket.io-client-cpp\src\sio_socket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\CommandLineOptions.h" />
@@ -113,6 +117,11 @@
     <ClInclude Include="..\src\TemperatureSensor.h" />
     <ClInclude Include="..\src\TemperatureSensorFactory.h" />
     <ClInclude Include="..\src\VirtualTemperatureSensor.h" />
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\internal\sio_client_impl.h" />
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\internal\sio_packet.h" />
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_client.h" />
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_message.h" />
+    <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_socket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
