@@ -82,6 +82,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>%BOOST_PATH%\lib\libboost_date_time-vc141-mt-sgd-x32-1_67.lib;%BOOST_PATH%\lib\libboost_random-vc141-mt-sgd-x32-1_67.lib;%BOOST_PATH%\lib\libboost_system-vc141-mt-sgd-x32-1_67.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
