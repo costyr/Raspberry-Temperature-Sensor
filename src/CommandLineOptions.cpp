@@ -9,17 +9,17 @@ CommandLineOptions::CommandLineOptions()
 {
   kOptionHandlers = { { "--server_url",
                         [this](int & aPos, int argc, char * argv[]) {
-                          if (aPos < argc)
-                            return 1;
-                          mServerURL = argv[aPos];
                           aPos++;
+                          if (aPos >= argc)
+                            return EINVAL;
+                          mServerURL= argv[aPos];
                           return 0;
                         } },
                       { "--server_token", [this](int & aPos, int argc, char * argv[]) {
-                         if (aPos < argc)
-                           return 1;
-                         mServerToken= argv[aPos];
                          aPos++;
+                         if (aPos >= argc)
+                           return EINVAL;
+                         mServerToken= argv[aPos];
                          return 0;
                        } } };
 }
@@ -36,12 +36,21 @@ int CommandLineOptions::ParseCommandLine(int argc, char * argv[])
 
     if (it != kOptionHandlers.end())
     {
-      if (it->second(i, argc, argv) != 0)
-        return -1;
+      int ret = it->second(i, argc, argv);
+      if (ret != 0)
+        return ret;
     }
   }
 
   return 0;
+}
+
+bool CommandLineOptions::HasExpectedOptions() const
+{
+  if (mServerURL.empty() || mServerToken.empty())
+    return false;
+
+  return true;
 }
 
 const string & CommandLineOptions::GetServerURL() const

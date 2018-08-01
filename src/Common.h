@@ -5,15 +5,16 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
-#include <string>
-#include <vector>
-#include <utility>
-#include <memory>
-#include <functional>
-#include <chrono>
-#include <thread>
 #include <algorithm>
+#include <chrono>
+#include <functional>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <thread>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
-#endif // _COMMON_H_
+#endif  // _COMMON_H_

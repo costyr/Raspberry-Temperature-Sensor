@@ -15,6 +15,8 @@ public:
 
   int ParseCommandLine(int argc, char *argv[]);
 
+  bool HasExpectedOptions() const;
+
   const string & GetServerURL() const;
 
   const string & GetServerToken() const;
