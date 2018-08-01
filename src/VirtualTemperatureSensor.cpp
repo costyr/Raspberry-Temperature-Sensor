@@ -1,13 +1,13 @@
 /**
- * 
+ *
  */
 
 #include "VirtualTemperatureSensor.h"
 
 VirtualTemperatureSensor::VirtualTemperatureSensor(function<void(float)> aTempCallBack,
                                                    function<void(float)> aHumidityCallBack)
-: mTempCallBack(aTempCallBack),
-  mHumidityCallBack(aHumidityCallBack)
+  : mTempCallBack(aTempCallBack)
+  , mHumidityCallBack(aHumidityCallBack)
 {
 }
 
@@ -19,16 +19,16 @@ void VirtualTemperatureSensor::Read()
 {
   if (mPos >= mTemperatures.size())
     mPos = 0;
-  
+
   auto & currentTemperature = mTemperatures[mPos];
 
-  if (currentTemperature.first != mTemperature)
+  if (fabs(currentTemperature.first - mTemperature) >= 0.1)
   {
     mTemperature = currentTemperature.first;
     mTempCallBack(mTemperature);
   }
 
-  if (currentTemperature.second != mHumidity)
+  if (fabs(currentTemperature.second - mHumidity) >= 0.1)
   {
     mHumidity = currentTemperature.second;
     mHumidityCallBack(mHumidity);

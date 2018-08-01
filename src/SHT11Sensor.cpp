@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 #include "rpi-sht1x/RPi_SHT1x.h"
 #include "SHT11Sensor.h"
 
@@ -61,13 +62,13 @@ void SHT11Sensor::Read()
     // Calculate Temperature and Humidity
     SHT1x_Calc(&humi_val.f, &temp_val.f);
 
-    if (temp_val.f != mTemperature)
+    if (fabs(temp_val.f - mTemperature) >= 0.1)
     {
         mTemperature = temp_val.f;
         mTempCallBack(mTemperature);
     }
 
-    if (humi_val.f != mHumidity)
+    if (fabs(humi_val.f != mHumidity) >= 0.1)
     {
         mHumidity = humi_val.f;
         mHumidityCallBack(mHumidity);
