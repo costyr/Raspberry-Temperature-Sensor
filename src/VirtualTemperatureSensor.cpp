@@ -3,6 +3,7 @@
  */
 
 #include "VirtualTemperatureSensor.h"
+#include <math.h>
 
 VirtualTemperatureSensor::VirtualTemperatureSensor(function<void(float)> aTempCallBack,
                                                    function<void(float)> aHumidityCallBack)
