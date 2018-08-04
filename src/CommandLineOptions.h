@@ -26,6 +26,9 @@ private:
 
   string mServerURL;
   string mServerToken;
+
+  int ParseStringValue(
+    string & aValueToSet, int & aPos, int argc, char * argv[]);
 };
 
 #endif // _COMMANDLINE_OPTIONS_H_

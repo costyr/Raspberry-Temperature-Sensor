@@ -7,20 +7,10 @@
 
 CommandLineOptions::CommandLineOptions()
 {
-  kOptionHandlers = { { "--server_url",
-                        [this](int & aPos, int argc, char * argv[]) {
-                          aPos++;
-                          if (aPos >= argc)
-                            return EINVAL;
-                          mServerURL= argv[aPos];
-                          return 0;
-                        } },
-                      { "--server_token", [this](int & aPos, int argc, char * argv[]) {
-                         aPos++;
-                         if (aPos >= argc)
-                           return EINVAL;
-                         mServerToken= argv[aPos];
-                         return 0;
+  kOptionHandlers = { { "--server_url", std::bind(&CommandLineOptions::ParseStringValue, this,
+                                                  mServerURL, _1, _2, _3) },
+                      { "--server_token", [this](int & aPos, int argc, char * argv[]) { 
+                                          return ParseStringValue(mServerToken, aPos, argc, argv);
                        } } };
 }
 
@@ -64,3 +54,13 @@ const string & CommandLineOptions::GetServerToken() const
 }
 
 //----------------------------------------------------------------
+// Private members
+
+int CommandLineOptions::ParseStringValue(string & aValueToSet, int & aPos, int argc, char * argv[])
+{
+  aPos++;
+  if (aPos >= argc)
+    return EINVAL;
+  aValueToSet = argv[aPos];
+  return 0;
+}

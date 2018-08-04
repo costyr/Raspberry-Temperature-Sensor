@@ -16,5 +16,6 @@
 #include <vector>
 
 using namespace std;
+using namespace std::placeholders;
 
 #endif  // _COMMON_H_
