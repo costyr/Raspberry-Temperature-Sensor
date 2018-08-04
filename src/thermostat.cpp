@@ -43,10 +43,16 @@ int main(int argc, char * argv[])
   int ret = commandLineOptions.ParseCommandLine(argc, argv);
 
   if (ret != 0)
+  {
+    printf("Invalid command line!\n");
     return ret;
+  }
 
   if (!commandLineOptions.HasExpectedOptions())
+  {
+	printf("Invalid command line!\n");
     return EINVAL;
+  }
 
   SocketIOConnection socket(commandLineOptions.GetServerToken());
 
