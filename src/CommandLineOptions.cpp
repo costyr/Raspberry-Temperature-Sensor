@@ -7,11 +7,15 @@
 
 CommandLineOptions::CommandLineOptions()
 {
-  kOptionHandlers = { { "--server_url", std::bind(&CommandLineOptions::ParseStringValue, this,
-                                                  mServerURL, _1, _2, _3) },
-                      { "--server_token", [this](int & aPos, int argc, char * argv[]) { 
-                                          return ParseStringValue(mServerToken, aPos, argc, argv);
-                       } } };
+  auto urlHandler = [this](int & aPos, int argc, char * argv[]) {
+    return ParseStringValue(mServerURL, aPos, argc, argv);
+  };
+
+  auto tokenHandler = [this](int & aPos, int argc, char * argv[]) {
+    return ParseStringValue(mServerToken, aPos, argc, argv);
+  };
+
+  kOptionHandlers = { { "--server_url", urlHandler }, { "--server_token", tokenHandler } };
 }
 
 int CommandLineOptions::ParseCommandLine(int argc, char * argv[])
