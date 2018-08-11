@@ -33,6 +33,12 @@ compile_cpp:
 all: compile_c compile_cpp
 	@echo "Linking..."
 	${CCXX} *.o ${LIBDIRS} ${LIBS} -o thermostat
+	
+install:
+	@echo "Installing..."
+	cp thermostat /usr/local/bin
+	cp thermostat.service /lib/systemd/system
+	systemctl start thermostat
 
 clean:
 	@echo "Cleaning up.."

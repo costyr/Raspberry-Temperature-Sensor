@@ -1,0 +1,14 @@
+[Unit]
+Description=Thermostat service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/usr/local/bin/thermostat --server_url "http://192.168.0.4:8080" -server_token "2468a201-8b21-436f-8bbb-5b90567b6281"
+
+[Install]
+WantedBy=multi-user.target
