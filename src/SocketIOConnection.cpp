@@ -27,7 +27,7 @@ void SocketIOConnection::Emit(float aTemperature)
   auto msg                = sio::object_message::create();
   msg->get_map()["token"] = sio::string_message::create(mToken);
   msg->get_map()["temp"]  = sio::double_message::create(aTemperature);
-  mSocketIOClient.socket()->emit("Room1Temp", msg);
+  mSocketIOClient.socket("/thermostat")->emit("Room1Temp", msg);
 }
 
 bool SocketIOConnection::ConnectionFailed() const

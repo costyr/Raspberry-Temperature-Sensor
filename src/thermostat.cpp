@@ -50,7 +50,7 @@ int main(int argc, char * argv[])
 
   if (!commandLineOptions.HasExpectedOptions())
   {
-	printf("Invalid command line!\n");
+    printf("Invalid command line!\n");
     return EINVAL;
   }
 
@@ -83,7 +83,7 @@ int main(int argc, char * argv[])
   while (!done && !socket.ConnectionFailed())
   {
     temperatureSensor->Read();
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(2));
   }
 
   printf("Done!\n");

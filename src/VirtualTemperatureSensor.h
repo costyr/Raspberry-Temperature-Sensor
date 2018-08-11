@@ -24,10 +24,10 @@ public:
 private:
   size_t mPos = 0;
 
-  vector<pair<float, float>> mTemperatures = { { 28.74F, 60.0F }, { 28.75F, 60.0F },
-                                               { 28.76F, 60.0F }, { 28.78F, 60.0F },
-                                               { 28.79F, 60.0F }, { 27.0F, 61.1F },
-                                               { 28.3F, 59.0F },  { 26.9F, 58.2F } };
+  vector<pair<float, float>> mTemperatures = {
+    { 28.74F, 60.0F }, { 28.75F, 60.0F }, { 28.76F, 60.0F }, { 28.78F, 60.0F }, { 28.79F, 60.0F },
+    { 27.0F, 61.1F },  { 28.3F, 59.0F },  { 26.9F, 58.2F },  { 25.0F, 60.0F },  { 26.0F, 60.0F }
+  };
 
   float mTemperature{ 0 };
   float mHumidity{ 0 };
