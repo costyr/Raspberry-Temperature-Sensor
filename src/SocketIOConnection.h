@@ -18,7 +18,7 @@ public:
 
   void Connect(const string & aURL);
 
-  void Emit(float aTemperature);
+  void Emit(float aTemperature, const string & aRoomId);
 
   bool ConnectionFailed() const;
 

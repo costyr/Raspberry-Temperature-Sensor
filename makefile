@@ -35,11 +35,20 @@ all: compile_c compile_cpp
 	${CCXX} *.o ${LIBDIRS} ${LIBS} -o thermostat
 	
 install:
-	@echo "Installing..."
+	@echo "Installing service..."
 	cp thermostat /usr/local/bin
 	cp thermostat.service /lib/systemd/system
 	systemctl start thermostat
-
+	
+uninstall:
+	@echo "Uinstalling service..."
+	systemctl stop thermostat
+	systemctl disable thermostat
+	rm /lib/systemd/system/thermostat.service
+	systemctl daemon-reload
+	systemctl reset-failed
+	rm /usr/local/bin/thermostat
+	
 clean:
 	@echo "Cleaning up.."
 	-rm -rf *.o # - prefix for ignoring errors and continue execution

@@ -15,7 +15,13 @@ CommandLineOptions::CommandLineOptions()
     return ParseStringValue(mServerToken, aPos, argc, argv);
   };
 
-  kOptionHandlers = { { "--server_url", urlHandler }, { "--server_token", tokenHandler } };
+  auto roomIdHandler = [this](int & aPos, int argc, char * argv[]) {
+    return ParseStringValue(mRoomId, aPos, argc, argv);
+  };
+
+  kOptionHandlers = { { "--server_url", urlHandler },
+                      { "--server_token", tokenHandler },
+                      { "--room_id", roomIdHandler } };
 }
 
 int CommandLineOptions::ParseCommandLine(int argc, char * argv[])
@@ -41,7 +47,7 @@ int CommandLineOptions::ParseCommandLine(int argc, char * argv[])
 
 bool CommandLineOptions::HasExpectedOptions() const
 {
-  if (mServerURL.empty() || mServerToken.empty())
+  if (mServerURL.empty() || mServerToken.empty() || mRoomId.empty())
     return false;
 
   return true;
@@ -55,6 +61,11 @@ const string & CommandLineOptions::GetServerURL() const
 const string & CommandLineOptions::GetServerToken() const
 {
   return mServerToken;
+}
+
+const string & CommandLineOptions::GetRoomId() const
+{
+  return mRoomId;
 }
 
 //----------------------------------------------------------------

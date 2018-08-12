@@ -59,10 +59,10 @@ int main(int argc, char * argv[])
   auto serverUrl = commandLineOptions.GetServerURL();
   socket.Connect(serverUrl);
 
-  std::function<void(float)> printTemperature = [&socket](float aTemperature) {
+  std::function<void(float)> printTemperature = [&socket, &commandLineOptions](float aTemperature) {
     // Print the Temperature to the console
     printf("Temperature: %0.1f\n", aTemperature);
-    socket.Emit(aTemperature);
+    socket.Emit(aTemperature, commandLineOptions.GetRoomId());
   };
 
   std::function<void(float)> printHumidity = [](float aHumidity) {

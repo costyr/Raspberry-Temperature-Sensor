@@ -22,12 +22,12 @@ void SocketIOConnection::Connect(const string & aURL)
   mSocketIOClient.connect(aURL);
 }
 
-void SocketIOConnection::Emit(float aTemperature)
+void SocketIOConnection::Emit(float aTemperature, const string & aRoomId)
 {
   auto msg                = sio::object_message::create();
   msg->get_map()["token"] = sio::string_message::create(mToken);
   msg->get_map()["temp"]  = sio::double_message::create(aTemperature);
-  mSocketIOClient.socket("/thermostat")->emit("Room1Temp", msg);
+  mSocketIOClient.socket("/thermostat")->emit(aRoomId, msg);
 }
 
 bool SocketIOConnection::ConnectionFailed() const
