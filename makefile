@@ -20,7 +20,7 @@ SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/sio_socket.cpp
 SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/internal/sio_client_impl.cpp 
 SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/internal/sio_packet.cpp
 
-LIBS = -lboost_system -lpthread -lbcm2835
+LIBS = -lboost_system -lpthread -lbcm2835 -lcrypto -lssl
 
 compile_c:
 	@echo "Compiling c files..."
