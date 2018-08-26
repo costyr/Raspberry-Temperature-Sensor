@@ -28,7 +28,7 @@ compile_c:
 
 compile_cpp:
 	@echo "Compiling cpp files..."
-	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${OPTIONS}
+	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 -DSIO_TLS ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${OPTIONS}
 
 all: compile_c compile_cpp
 	@echo "Linking..."
@@ -37,8 +37,21 @@ all: compile_c compile_cpp
 install:
 	@echo "Installing service..."
 	cp thermostat /usr/local/bin
+	@echo "[Unit]" > thermostat.service
+	@echo "Description=Thermostat service" > thermostat.service
+	@echo "After=network.target" > thermostat.service
+	@echo "StartLimitIntervalSec=0" > thermostat.service
+	@echo "[Service]" > thermostat.service
+	@echo "Type=simple" > thermostat.service
+	@echo "Restart=always" > thermostat.service
+	@echo "RestartSec=1+" > thermostat.service
+	@echo "User=pi" > thermostat.service
+	@echo ExecStart=/usr/local/bin/thermostat --server_url "$(URL)" --server_token "$(TOKEN)" --room_id "$(ROOMID)" > thermostat.service
+	@echo "[Install]" > thermostat.service
+	@echo "WantedBy=multi-user.target" > thermostat.service
 	cp thermostat.service /lib/systemd/system
 	systemctl start thermostat
+	systemctl enable thermostat
 	
 uninstall:
 	@echo "Uinstalling service..."
