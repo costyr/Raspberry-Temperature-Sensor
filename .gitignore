@@ -41,3 +41,4 @@ Release/
 Release-LIB/
 Win32/
 x64/
+/win/packages

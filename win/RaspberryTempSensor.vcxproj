@@ -71,18 +71,18 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WEBSOCKETPP_CPP11_STL_;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WEBSOCKETPP_CPP11_STL_;_SCL_SECURE_NO_WARNINGS;SIO_TLS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\third-party;..\third-party\socket.io-client-cpp\lib\websocketpp;..\third-party\socket.io-client-cpp\lib\rapidjson\include;%BOOST_PATH%</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\third-party;..\third-party\socket.io-client-cpp\lib\websocketpp;..\third-party\socket.io-client-cpp\lib\rapidjson\include;%BOOST_PATH%;packages\openssl-vc140-static-32_64.1.1.0\lib\native\include\openssl</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>%BOOST_PATH%\lib\libboost_date_time-vc141-mt-sgd-x32-1_67.lib;%BOOST_PATH%\lib\libboost_random-vc141-mt-sgd-x32-1_67.lib;%BOOST_PATH%\lib\libboost_system-vc141-mt-sgd-x32-1_67.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%BOOST_PATH%\lib\libboost_date_time-vc141-mt-sgd-x32-1_67.lib;%BOOST_PATH%\lib\libboost_random-vc141-mt-sgd-x32-1_67.lib;%BOOST_PATH%\lib\libboost_system-vc141-mt-sgd-x32-1_67.lib;Crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,7 +124,17 @@
     <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_message.h" />
     <ClInclude Include="..\third-party\socket.io-client-cpp\src\sio_socket.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\openssl-vc140-static-32_64.1.1.0\build\native\openssl-vc140-static-32_64.targets" Condition="Exists('packages\openssl-vc140-static-32_64.1.1.0\build\native\openssl-vc140-static-32_64.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\openssl-vc140-static-32_64.1.1.0\build\native\openssl-vc140-static-32_64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\openssl-vc140-static-32_64.1.1.0\build\native\openssl-vc140-static-32_64.targets'))" />
+  </Target>
 </Project>
