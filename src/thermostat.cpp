@@ -12,6 +12,7 @@
 #include "SocketIOConnection.h"
 #include "TemperatureSensorFactory.h"
 #include <signal.h>
+#include <time.h>
 
 volatile sig_atomic_t done = 0;
 
@@ -24,7 +25,11 @@ string GetNowDate()
 {
   std::time_t now = std::time(nullptr);
   tm          timeBuffer;
+#ifdef _WIN32
   localtime_s(&timeBuffer, &now);
+#else
+  localtime_r(&now, &timeBuffer);
+#endif
   string buffer;
   buffer.resize(100);
   // asctime_s(&buffer[0], buffer.size(), &timeBuffer);
