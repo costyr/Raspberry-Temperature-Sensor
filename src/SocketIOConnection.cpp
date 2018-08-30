@@ -30,6 +30,14 @@ void SocketIOConnection::Emit(float aTemperature, const string & aRoomId)
   mSocketIOClient.socket("/thermostat")->emit(aRoomId, msg);
 }
 
+void SocketIOConnection::EmitHumidity(float aHumidity, const string & aRoomId)
+{
+  auto msg                   = sio::object_message::create();
+  msg->get_map()["token"]    = sio::string_message::create(mToken);
+  msg->get_map()["humidity"] = sio::double_message::create(aHumidity);
+  mSocketIOClient.socket("/thermostat")->emit(aRoomId, msg);
+}
+
 bool SocketIOConnection::ConnectionFailed() const
 {
   return mConnectionFailed;

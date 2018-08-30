@@ -19,9 +19,19 @@ CommandLineOptions::CommandLineOptions()
     return ParseStringValue(mRoomId, aPos, argc, argv);
   };
 
+  auto logSensorDataHandler = [this](int & /*aPos*/, int /*argc*/, char * /*argv*/ []) {
+    return ParseBoolValue(mLogSensorData);
+  };
+
+  auto scanHumidityHandler = [this](int & /*aPos*/, int /*argc*/, char * /*argv*/ []) {
+    return ParseBoolValue(mScanHumidity);
+  };
+
   kOptionHandlers = { { "--server_url", urlHandler },
                       { "--server_token", tokenHandler },
-                      { "--room_id", roomIdHandler } };
+                      { "--room_id", roomIdHandler },
+                      { "--log_sensor_data", logSensorDataHandler },
+                      { "--scan_humidity", scanHumidityHandler } };
 }
 
 int CommandLineOptions::ParseCommandLine(int argc, char * argv[])
@@ -68,6 +78,16 @@ const string & CommandLineOptions::GetRoomId() const
   return mRoomId;
 }
 
+bool CommandLineOptions::LogSensorData() const
+{
+  return mLogSensorData;
+}
+
+bool CommandLineOptions::ScanHumidity() const
+{
+  return mScanHumidity;
+}
+
 //----------------------------------------------------------------
 // Private members
 
@@ -77,5 +97,11 @@ int CommandLineOptions::ParseStringValue(string & aValueToSet, int & aPos, int a
   if (aPos >= argc)
     return EINVAL;
   aValueToSet = argv[aPos];
+  return 0;
+}
+
+int CommandLineOptions::ParseBoolValue(bool & aValueToSet)
+{
+  aValueToSet = true;
   return 0;
 }

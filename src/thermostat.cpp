@@ -20,6 +20,18 @@ void term(int signum)
   done = 1;
 }
 
+string GetNowDate()
+{
+  std::time_t now = std::time(nullptr);
+  tm          timeBuffer;
+  localtime_s(&timeBuffer, &now);
+  string buffer;
+  buffer.resize(100);
+  // asctime_s(&buffer[0], buffer.size(), &timeBuffer);
+  strftime(&buffer[0], buffer.size(), "%A %c", &timeBuffer);
+  return buffer;
+}
+
 int main(int argc, char * argv[])
 {
 #ifdef _WIN32
@@ -61,13 +73,23 @@ int main(int argc, char * argv[])
 
   std::function<void(float)> printTemperature = [&socket, &commandLineOptions](float aTemperature) {
     // Print the Temperature to the console
-    printf("Temperature: %0.1f\n", aTemperature);
+    if (commandLineOptions.LogSensorData())
+    {
+      printf("%s Temperature: %0.1f\n", GetNowDate().c_str(), aTemperature);
+    }
     socket.Emit(aTemperature, commandLineOptions.GetRoomId());
   };
 
-  std::function<void(float)> printHumidity = [](float aHumidity) {
+  std::function<void(float)> printHumidity = [&socket, &commandLineOptions](float aHumidity) {
     // Print the Humidity to the console
-    printf("Humidity: %0.1f%%\n", aHumidity);
+    if (!commandLineOptions.ScanHumidity())
+      return;
+
+    if (commandLineOptions.LogSensorData())
+    {
+      printf("%s Humidity: %0.1f%%\n", GetNowDate().c_str(), aHumidity);
+    }
+    socket.Emit(aHumidity, commandLineOptions.GetRoomId());
   };
 
   TemperatureSensorFactory temperatureSensorFactory;

@@ -20,6 +20,8 @@ public:
 
   void Emit(float aTemperature, const string & aRoomId);
 
+  void EmitHumidity(float aHumidity, const string & aRoomId);
+
   bool ConnectionFailed() const;
 
 private:
