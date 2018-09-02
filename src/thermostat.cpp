@@ -119,7 +119,6 @@ int main(int argc, char * argv[])
   signal(SIGTERM, SIG_DFL);
   signal(SIGINT, SIG_DFL);
 #else
-  struct sigaction action;
   memset(&action, 0, sizeof(struct sigaction));
   action.sa_handler = SIG_DFL;
   sigaction(SIGTERM, &action, NULL);
