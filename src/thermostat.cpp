@@ -114,4 +114,17 @@ int main(int argc, char * argv[])
   }
 
   printf("Done!\n");
+
+#ifdef _WIN32
+  signal(SIGTERM, SIG_DFL);
+  signal(SIGINT, SIG_DFL);
+#else
+  struct sigaction action;
+  memset(&action, 0, sizeof(struct sigaction));
+  action.sa_handler = SIG_DFL;
+  sigaction(SIGTERM, &action, NULL);
+  sigaction(SIGINT, &action, NULL);
+#endif
+
+  return 0;
 }
