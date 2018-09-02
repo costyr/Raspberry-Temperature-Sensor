@@ -11,7 +11,8 @@ SocketIOConnection::SocketIOConnection(const string & aToken)
 
 SocketIOConnection::~SocketIOConnection()
 {
-  mSocketIOClient.close();
+  mSocketIOClient.sync_close();
+  mSocketIOClient.clear_con_listeners();
 }
 
 void SocketIOConnection::Connect(const string & aURL)
