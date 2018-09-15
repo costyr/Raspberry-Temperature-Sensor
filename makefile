@@ -48,8 +48,8 @@ install:
 	@echo "RestartSec=1" >> thermostat.service
 	@echo "User=pi" >> thermostat.service
 	@echo "ExecStart=/usr/local/bin/thermostat --server_url "$(URL)" --server_token "$(TOKEN)" --room_id "$(ROOMID)" --log_sensor_data" >> thermostat.service
-	@echo "StandardOutput=file:/home/pi/thermostat.log" >> thermostat.service
-	@echo "StandardError=file:/home/pi/thermostat.log" >> thermostat.service
+	@echo "StandardOutput=syslog" >> thermostat.service
+	@echo "StandardError=syslog" >> thermostat.service
 	@echo "SyslogIdentifier=thermostat" >> thermostat.service
 	@echo "[Install]" >> thermostat.service
 	@echo "WantedBy=multi-user.target" >> thermostat.service
