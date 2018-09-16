@@ -109,7 +109,7 @@ int main(int argc, char * argv[])
 
   temperatureSensor->Init();
 
-  while (!done && !socket.ConnectionFailed())
+  while (!done && !socket.ConnectionFailed() && !socket.ConnectionClosed())
   {
     temperatureSensor->Read();
     std::this_thread::sleep_for(std::chrono::seconds(2));

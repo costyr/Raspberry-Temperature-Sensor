@@ -6,6 +6,7 @@
 #define _COMMON_H_
 
 #include <algorithm>
+#include <atomic>
 #include <chrono>
 #include <ctime>
 #include <functional>

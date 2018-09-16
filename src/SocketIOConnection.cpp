@@ -18,6 +18,7 @@ SocketIOConnection::~SocketIOConnection()
 void SocketIOConnection::Connect(const string & aURL)
 {
   mSocketIOClient.set_fail_listener(std::bind(&SocketIOConnection::OnFail, this));
+  mSocketIOClient.set_close_listener(std::bind(&SocketIOConnection::OnClosed, this));
 
   mSocketIOClient.set_reconnect_attempts(0);
   mSocketIOClient.connect(aURL);
@@ -44,7 +45,17 @@ bool SocketIOConnection::ConnectionFailed() const
   return mConnectionFailed;
 }
 
+bool SocketIOConnection::ConnectionClosed() const
+{
+  return mConnectionClosed;
+}
+
 void SocketIOConnection::OnFail()
 {
   mConnectionFailed = true;
+}
+
+void SocketIOConnection::OnClosed()
+{
+  mConnectionClosed = true;
 }

@@ -24,13 +24,19 @@ public:
 
   bool ConnectionFailed() const;
 
+  bool ConnectionClosed() const;
+
 private:
   string      mToken;
   sio::client mSocketIOClient;
 
-  bool mConnectionFailed{ false };
+  std::atomic<bool> mConnectionFailed{ false };
+
+  std::atomic<bool> mConnectionClosed{ false };
 
   void OnFail();
+
+  void OnClosed();
 };
 
 #endif  // _SOCKET_IO_CONNECTION_H_
