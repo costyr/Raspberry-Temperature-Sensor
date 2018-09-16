@@ -80,7 +80,7 @@ int main(int argc, char * argv[])
     // Print the Temperature to the console
     if (commandLineOptions.LogSensorData())
     {
-      printf("%s Temperature: %0.1f\n", GetNowDate().c_str(), aTemperature);
+      printf("Temperature: %0.1f\n", aTemperature);
     }
     socket.Emit(aTemperature, commandLineOptions.GetRoomId());
   };
@@ -92,7 +92,7 @@ int main(int argc, char * argv[])
 
     if (commandLineOptions.LogSensorData())
     {
-      printf("%s Humidity: %0.1f%%\n", GetNowDate().c_str(), aHumidity);
+      printf("Humidity: %0.1f%%\n", aHumidity);
     }
     socket.Emit(aHumidity, commandLineOptions.GetRoomId());
   };
