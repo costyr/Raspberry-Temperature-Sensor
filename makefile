@@ -22,6 +22,8 @@ SOURCEFILES_CPP += ./third-party/socket.io-client-cpp/src/internal/sio_packet.cp
 
 LIBS = -lboost_system -lpthread -lbcm2835 -lcrypto -lssl
 
+url_escaped = $(sed 's/\//\\\//g' <<< $(URL))
+
 compile_c:
 	@echo "Compiling c files..."
 	${CC} ${INCLUDES_C} -c ${SOURCEFILES_C} 
@@ -53,7 +55,6 @@ uninstall_mail_notify:
 install:
 	@echo "Installing service..."
 	cp thermostat /usr/local/bin
-	url_escaped=\$(sed 's/\//\\\//g' <<< $(URL))
 	sed -e "s/$${URL}/$(url_escaped)/" -e "s/$${TOKEN}/$(TOKEN)/" -e "s/$${ROOMID}/$(ROOMID)/" thermostat_template.service >> thermostat.service
 	mv thermostat.service /lib/systemd/system
 	systemctl start thermostat
