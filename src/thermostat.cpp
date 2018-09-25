@@ -37,6 +37,11 @@ string GetNowDate()
   return buffer;
 }
 
+float RoundToNearstHalf(float aNumber)
+{
+  return std::floor((aNumber * 2) + 0.5f) / 2;
+}
+
 int main(int argc, char * argv[])
 {
 #ifdef _WIN32
@@ -83,7 +88,7 @@ int main(int argc, char * argv[])
       printf("Temperature: %0.1f\n", aTemperature);
       fflush(stdout);
     }
-    socket.Emit(aTemperature, commandLineOptions.GetRoomId());
+    socket.Emit(RoundToNearstHalf(aTemperature), commandLineOptions.GetRoomId());
   };
 
   std::function<void(float)> printHumidity = [&socket, &commandLineOptions](float aHumidity) {
