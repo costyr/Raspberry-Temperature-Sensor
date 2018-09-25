@@ -34,6 +34,28 @@ all: compile_c compile_cpp
 	@echo "Linking..."
 	${CCXX} *.o ${LIBDIRS} ${LIBS} -o thermostat
 	
+install_mail_notify:
+	@echo "Installing mail notify service...
+	cp notify-by-email.sh /usr/local/bin"
+	chmod +=x /usr/local/bin/notify-by-email.sh
+	rm notify-by-email.service
+	@echo "[Unit]" >> notify-by-email.service
+	@echo "Description=Notify by email when thermostat service fails" >> notify-by-email.service
+	@echo "[Service]" >> notify-by-email.service
+	@echo "Type=oneshot" >> notify-by-email.service
+	@echo "ExecStart=/usr/local/bin/notify-by-email.sh" >> notify-by-email.service
+	cp notify-by-email.service /lib/systemd/system
+	systemctl enable notify-by-email
+	
+uninstall_mail_notify:
+	@echo "Uninstalling  mail notify service..."
+	systemctl stop notify-by-email
+	systemctl disable notify-by-email
+	rm /lib/systemd/system/notify-by-email.service
+	systemctl daemon-reload
+	systemctl reset-failed
+	rm /usr/local/bin/notify-by-email
+	
 install:
 	@echo "Installing service..."
 	cp thermostat /usr/local/bin
@@ -42,6 +64,7 @@ install:
 	@echo "Description=Thermostat service" >> thermostat.service
 	@echo "After=network.target" >> thermostat.service
 	@echo "StartLimitIntervalSec=0" >> thermostat.service
+	@echo "OnFailure=notify-by-email.service" >> thermostat.service
 	@echo "[Service]" >> thermostat.service
 	@echo "Type=simple" >> thermostat.service
 	@echo "Restart=always" >> thermostat.service
@@ -58,7 +81,7 @@ install:
 	systemctl enable thermostat
 	
 uninstall:
-	@echo "Uinstalling service..."
+	@echo "Uninstalling service..."
 	systemctl stop thermostat
 	systemctl disable thermostat
 	rm /lib/systemd/system/thermostat.service
