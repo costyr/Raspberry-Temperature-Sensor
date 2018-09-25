@@ -53,7 +53,7 @@ uninstall_mail_notify:
 install:
 	@echo "Installing service..."
 	cp thermostat /usr/local/bin
-	sed -e "s/\${URL}/$(URL)/" -e "s/\${TOKEN}/$(TOKEN)/" -e "s/\${ROOMID}/$(ROOMID)/" thermostat_template.service >> thermostat.service
+	sed -e "s/$${URL}/$(URL)/" -e "s/$${TOKEN}/$(TOKEN)/" -e "s/$${ROOMID}/$(ROOMID)/" thermostat_template.service >> thermostat.service
 	mv thermostat.service /lib/systemd/system
 	systemctl start thermostat
 	systemctl enable thermostat
