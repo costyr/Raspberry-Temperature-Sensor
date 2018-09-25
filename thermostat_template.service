@@ -1,0 +1,18 @@
+[Unit]
+Description=Thermostat service
+After=network.target
+StartLimitIntervalSec=0
+OnFailure=notify-by-email.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=pi
+ExecStart=/usr/local/bin/thermostat --server_url "${URL}" --server_token "${TOKEN}" --room_id "${ROOMID}" --log_sensor_data
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=thermostat
+
+[Install]
+WantedBy=multi-user.target

@@ -36,14 +36,8 @@ all: compile_c compile_cpp
 	
 install_mail_notify:
 	@echo "Installing mail notify service...
-	cp notify-by-email.sh /usr/local/bin"
+	cp notify-by-email.sh /usr/local/bin
 	chmod +=x /usr/local/bin/notify-by-email.sh
-	rm notify-by-email.service
-	@echo "[Unit]" >> notify-by-email.service
-	@echo "Description=Notify by email when thermostat service fails" >> notify-by-email.service
-	@echo "[Service]" >> notify-by-email.service
-	@echo "Type=oneshot" >> notify-by-email.service
-	@echo "ExecStart=/usr/local/bin/notify-by-email.sh" >> notify-by-email.service
 	cp notify-by-email.service /lib/systemd/system
 	systemctl enable notify-by-email
 	
@@ -60,22 +54,7 @@ install:
 	@echo "Installing service..."
 	cp thermostat /usr/local/bin
 	rm thermostat.service
-	@echo "[Unit]" >> thermostat.service
-	@echo "Description=Thermostat service" >> thermostat.service
-	@echo "After=network.target" >> thermostat.service
-	@echo "StartLimitIntervalSec=0" >> thermostat.service
-	@echo "OnFailure=notify-by-email.service" >> thermostat.service
-	@echo "[Service]" >> thermostat.service
-	@echo "Type=simple" >> thermostat.service
-	@echo "Restart=always" >> thermostat.service
-	@echo "RestartSec=1" >> thermostat.service
-	@echo "User=pi" >> thermostat.service
-	@echo "ExecStart=/usr/local/bin/thermostat --server_url "$(URL)" --server_token "$(TOKEN)" --room_id "$(ROOMID)" --log_sensor_data" >> thermostat.service
-	@echo "StandardOutput=syslog" >> thermostat.service
-	@echo "StandardError=syslog" >> thermostat.service
-	@echo "SyslogIdentifier=thermostat" >> thermostat.service
-	@echo "[Install]" >> thermostat.service
-	@echo "WantedBy=multi-user.target" >> thermostat.service
+	sed -e "s/\${URL}/$(URL)/" -e "s/\${TOKEN}/$(TOKEN)/" -e "s/\${ROOMID}/$(ROOMID)/" thermostat_template.service >> thermostat.service
 	cp thermostat.service /lib/systemd/system
 	systemctl start thermostat
 	systemctl enable thermostat
