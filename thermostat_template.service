@@ -1,8 +1,11 @@
+# %n templates to the current service's name. 
+# In this case, %n is thermostat
+
 [Unit]
 Description=Thermostat service
 After=network.target
 StartLimitIntervalSec=0
-OnFailure=notify-by-email.service
+OnFailure=notify-by-email@%n.service
 
 [Service]
 Type=simple

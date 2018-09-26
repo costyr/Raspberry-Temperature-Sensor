@@ -1,6 +1,0 @@
-[Unit]
-Description=Notify by email when thermostat service fails
-
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/notify-by-email.sh
