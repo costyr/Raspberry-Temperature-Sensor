@@ -18,5 +18,5 @@ do
 done
 echo -e "</div></body></html>" >> $tmpfile
 
-ssmpt costyr@gmail <<< $tmpfile
+cat $tmpfile | ssmpt costyr@gmail
 rm $tmpfile
