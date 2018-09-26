@@ -9,8 +9,8 @@ LastErrors=$(tail /var/log/thermostat.log)
 IFS=$'\n'
 read -rd '' -a array <<< "$LastErrors"
 
-echo -e >> mail.txt
-echo -e >> mail.txt
+echo -e >> $tmpfile
+echo -e >> $tmpfile
 echo -e '<html><body><div style="background: #e9ecef; padding: 10pt;"/>' >> $tmpfile
 for element in "${array[@]}"
 do
