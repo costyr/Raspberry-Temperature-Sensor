@@ -1,3 +1,5 @@
+#!/bin/bash
+
 tmpfile=$(mktemp /tmp/mail-XXXXXX.txt)
 echo -e "To: costyr@gmail.com" >> $tmpfile
 echo -e "From: costyrpithermostat@gmail.com" >> $tmpfile
