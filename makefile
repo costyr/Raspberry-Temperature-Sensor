@@ -35,20 +35,19 @@ all: compile_c compile_cpp
 	${CCXX} *.o ${LIBDIRS} ${LIBS} -o thermostat
 	
 install_mail_notify:
-	@echo "Installing mail notify service...
+	@echo "Installing mail notify service..."
 	cp notify-by-email.sh /usr/local/bin
 	chmod +=x /usr/local/bin/notify-by-email.sh
-	cp notify-by-email.service /lib/systemd/system
-	systemctl enable notify-by-email
+	cp notify-by-email@.service /lib/systemd/system
+	systemctl link /lib/systemd/system/notify-by-email@.service
 	
 uninstall_mail_notify:
 	@echo "Uninstalling  mail notify service..."
-	systemctl stop notify-by-email
 	systemctl disable notify-by-email
-	rm /lib/systemd/system/notify-by-email.service
+	rm /lib/systemd/system/notify-by-email@.service
 	systemctl daemon-reload
 	systemctl reset-failed
-	rm /usr/local/bin/notify-by-email
+	rm /usr/local/bin/notify-by-email.sh
 	
 install:
 	@echo "Installing service..."
