@@ -34,7 +34,7 @@ int SignalHandler::Init()
 
   struct sigaction action;
   memset(&action, 0, sizeof(struct sigaction));
-  action.sa_handler = term;
+  action.sa_handler = TermSignalHandler;
   sigaction(SIGTERM, &action, NULL);
   sigaction(SIGINT, &action, NULL);
 #endif
