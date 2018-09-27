@@ -33,9 +33,8 @@ int SignalHandler::Init()
   if (!bcm2835_init())
     return 1;
 
-  struct sigaction action;
-  memset(&action, 0, sizeof(struct sigaction));
-  action.sa_handler = TermSignalHandler;
+  memset(&mAction, 0, sizeof(struct sigaction));
+  mAction.sa_handler = TermSignalHandler;
   sigaction(SIGTERM, &action, NULL);
   sigaction(SIGINT, &action, NULL);
 #endif

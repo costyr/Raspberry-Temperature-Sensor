@@ -20,6 +20,10 @@ public:
   bool IsDone() const;
 
 private:
+#ifndef _WIN32
+  struct sigaction mAction;
+#endif
+
   static SignalHandler * mSelf;
 
   volatile sig_atomic_t mDone = 0;
