@@ -7,4 +7,4 @@ Description=OnFailure email for %i
 [Service]
 Type=oneshot
 User=pi
-ExecStart=/usr/local/bin/notify-by-email.sh
+ExecStart=/usr/local/bin/notify-by-email.sh ${FROM} ${TO}

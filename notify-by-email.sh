@@ -1,8 +1,8 @@
 #!/bin/bash
 
 tmpfile=$(mktemp /tmp/mail-XXXXXX.txt)
-echo -e "To: costyr@gmail.com" >> $tmpfile
-echo -e "From: costyrpithermostat@gmail.com" >> $tmpfile
+echo -e "From: $1" >> $tmpfile
+echo -e "Date: $(date -R)" >> $tmpfile
 echo -e "Subject: Thermostat service failed!" >> $tmpfile
 echo -e "MIME-Version: 1.0" >> $tmpfile
 echo -e "Content-type: text/html; charset=utf-8" >> $tmpfile
@@ -20,5 +20,5 @@ do
 done
 echo -e "</div></body></html>" >> $tmpfile
 
-cat $tmpfile | ssmtp costyr@gmail.com
+cat $tmpfile | ssmtp $2
 rm $tmpfile
