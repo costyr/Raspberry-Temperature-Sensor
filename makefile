@@ -38,7 +38,7 @@ install_mail_notify:
 	@echo "Installing mail notify service..."
 	cp notify-by-email.sh /usr/local/bin
 	chmod +=x /usr/local/bin/notify-by-email.sh
-	sed -e "s/\$${FROM}/$(FROM)/" -e "s/\$${TO}/$(TO)/" -e notify-by-email_template@.service >> notify-by-email@.service
+	sed -e "s/\$${FROM}/$(FROM)/" -e "s/\$${TO}/$(TO)/" notify-by-email_template@.service >> notify-by-email@.service
 	mv notify-by-email@.service /lib/systemd/system
 	systemctl link /lib/systemd/system/notify-by-email@.service
 	
