@@ -5,6 +5,7 @@
 
 #ifndef _WIN32
 #include <bcm2835.h>
+#include <string.h>
 #endif
 #include "SignalHandler.h"
 
