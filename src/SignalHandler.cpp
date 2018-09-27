@@ -35,8 +35,8 @@ int SignalHandler::Init()
 
   memset(&mAction, 0, sizeof(struct sigaction));
   mAction.sa_handler = TermSignalHandler;
-  sigaction(SIGTERM, &action, NULL);
-  sigaction(SIGINT, &action, NULL);
+  sigaction(SIGTERM, &mAction, NULL);
+  sigaction(SIGINT, &mAction, NULL);
 #endif
 
   return 0;
@@ -64,9 +64,9 @@ void SignalHandler::ResetToDefault()
   signal(SIGTERM, SIG_DFL);
   signal(SIGINT, SIG_DFL);
 #else
-  memset(&action, 0, sizeof(struct sigaction));
-  action.sa_handler = SIG_DFL;
-  sigaction(SIGTERM, &action, NULL);
-  sigaction(SIGINT, &action, NULL);
+  memset(&mAction, 0, sizeof(struct sigaction));
+  mAction.sa_handler = SIG_DFL;
+  sigaction(SIGTERM, &mAction, NULL);
+  sigaction(SIGINT, &mAction, NULL);
 #endif
 }
