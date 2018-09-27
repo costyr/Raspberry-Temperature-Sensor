@@ -44,13 +44,11 @@ install_mail_notify:
 	
 uninstall_mail_notify:
 	@echo "Uninstalling  mail notify service..."
-	systemctl disable notify-by-email
+	systemctl disable notify-by-email@
 	rm /lib/systemd/system/notify-by-email@.service
-	systemctl daemon-reload
-	systemctl reset-failed
 	rm /usr/local/bin/notify-by-email.sh
 	
-install:
+install: install_mail_notify
 	@echo "Installing service..."
 	cp thermostat /usr/local/bin
 	sed -e "s/\$${URL}/$(subst /,\/,$(URL))/" -e "s/\$${TOKEN}/$(TOKEN)/" -e "s/\$${ROOMID}/$(ROOMID)/" thermostat_template.service >> thermostat.service
@@ -58,7 +56,7 @@ install:
 	systemctl start thermostat
 	systemctl enable thermostat
 	
-uninstall:
+uninstall: uninstall_mail_notify
 	@echo "Uninstalling service..."
 	systemctl stop thermostat
 	systemctl disable thermostat
