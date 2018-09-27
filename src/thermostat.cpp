@@ -4,22 +4,14 @@
  */
 
 #ifndef _WIN32
-#include <bcm2835.h>
 #include <string.h>
 #endif
 #include "CommandLineOptions.h"
 #include "Common.h"
+#include "SignalHandler.h"
 #include "SocketIOConnection.h"
 #include "TemperatureSensorFactory.h"
-#include <signal.h>
 #include <time.h>
-
-volatile sig_atomic_t done = 0;
-
-void term(int signum)
-{
-  done = 1;
-}
 
 string GetNowDate()
 {
@@ -44,25 +36,16 @@ float RoundToNearstHalf(float aNumber)
 
 int main(int argc, char * argv[])
 {
-#ifdef _WIN32
-  signal(SIGTERM, term);
-  signal(SIGINT, term);
-#else
+  SignalHandler signalHandler;
 
-  // Initialize the Raspberry Pi GPIO
-  if (!bcm2835_init())
-    return 1;
+  int ret = signalHandler.Init();
 
-  struct sigaction action;
-  memset(&action, 0, sizeof(struct sigaction));
-  action.sa_handler = term;
-  sigaction(SIGTERM, &action, NULL);
-  sigaction(SIGINT, &action, NULL);
-#endif
+  if (ret != 0)
+    return ret;
 
   CommandLineOptions commandLineOptions;
 
-  int ret = commandLineOptions.ParseCommandLine(argc, argv);
+  ret = commandLineOptions.ParseCommandLine(argc, argv);
 
   if (ret != 0)
   {
@@ -110,27 +93,20 @@ int main(int argc, char * argv[])
     temperatureSensorFactory.CreateTemperatureSensor(printTemperature, printHumidity);
 
   if (!temperatureSensor)
-    return -1;
+    return 1;
 
   temperatureSensor->Init();
 
-  while (!done && !socket.ConnectionFailed() && !socket.ConnectionClosed())
+  while (!signalHandler.IsDone())
   {
+    if (socket.ConnectionFailed() || socket.ConnectionClosed())
+      return ECONNABORTED;
+
     temperatureSensor->Read();
     std::this_thread::sleep_for(std::chrono::seconds(2));
   }
 
   printf("Done!\n");
-
-#ifdef _WIN32
-  signal(SIGTERM, SIG_DFL);
-  signal(SIGINT, SIG_DFL);
-#else
-  memset(&action, 0, sizeof(struct sigaction));
-  action.sa_handler = SIG_DFL;
-  sigaction(SIGTERM, &action, NULL);
-  sigaction(SIGINT, &action, NULL);
-#endif
 
   return 0;
 }

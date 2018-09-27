@@ -102,6 +102,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CommandLineOptions.cpp" />
+    <ClCompile Include="..\src\SignalHandler.cpp" />
     <ClCompile Include="..\src\SocketIOConnection.cpp" />
     <ClCompile Include="..\src\TemperatureSensorFactory.cpp" />
     <ClCompile Include="..\src\thermostat.cpp" />
@@ -114,6 +115,7 @@
   <ItemGroup>
     <ClInclude Include="..\src\CommandLineOptions.h" />
     <ClInclude Include="..\src\Common.h" />
+    <ClInclude Include="..\src\SignalHandler.h" />
     <ClInclude Include="..\src\SocketIOConnection.h" />
     <ClInclude Include="..\src\TemperatureSensor.h" />
     <ClInclude Include="..\src\TemperatureSensorFactory.h" />
