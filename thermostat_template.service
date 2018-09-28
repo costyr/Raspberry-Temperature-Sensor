@@ -9,8 +9,8 @@ OnFailure=notify-by-email@%n.service
 
 [Service]
 Type=simple
-Restart=always
-RestartSec=1
+Restart=on-failure
+RestartSec=20
 User=pi
 ExecStart=/usr/local/bin/thermostat --server_url "${URL}" --server_token "${TOKEN}" --room_id "${ROOMID}" --log_sensor_data
 StandardOutput=syslog
