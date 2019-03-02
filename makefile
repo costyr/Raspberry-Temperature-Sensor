@@ -2,6 +2,7 @@ CC = clang
 CCXX = clang++
 
 OPTIONS_CPP = -std=c++11
+OPTIONS_ARCH = -march=armv6 -mfpu=vfp
 
 INCLUDES_C = -I./third-party
 
@@ -24,11 +25,11 @@ LIBS = -lboost_system -lpthread -lbcm2835 -lcrypto -lssl
 
 compile_c:
 	@echo "Compiling c files..."
-	${CC} ${INCLUDES_C} -c ${SOURCEFILES_C} 
+	${CC} ${OPTIONS_ARCH} ${INCLUDES_C} -c ${SOURCEFILES_C} 
 
 compile_cpp:
 	@echo "Compiling cpp files..."
-	${CCXX} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 -DSIO_TLS ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${OPTIONS}
+	${CCXX} ${OPTIONS_ARCH} -DRAPIDJSON_HAS_CXX11_RVALUE_REFS=0 -DSIO_TLS ${INCLUDES_CPP} -c ${SOURCEFILES_CPP} ${OPTIONS}
 
 all: compile_c compile_cpp
 	@echo "Linking..."
