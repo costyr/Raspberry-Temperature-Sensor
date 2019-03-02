@@ -1,7 +1,8 @@
 #!/bin/bash
 
 tmpfile=$(mktemp /tmp/mail-XXXXXX.txt)
-echo -e "From: $1" >> $tmpfile
+echo -e "From: Thermostat Service <$1>" >> $tmpfile
+echo -e "To: $2" >> $tmpfile
 echo -e "Date: $(date -R)" >> $tmpfile
 echo -e "Subject: Thermostat service failed!" >> $tmpfile
 echo -e "MIME-Version: 1.0" >> $tmpfile
